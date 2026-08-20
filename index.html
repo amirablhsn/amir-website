@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amir Abulhassan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #060E14;
+    --surface:   #0D1A24;
+    --border:    #162330;
+    --accent:    #0F8FF0;
+    --accent-dim:#0A6FBB;
+    --text:      #EEF0F2;
+    --muted:     #6B8096;
+    --placeholder:#3A5266;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  nav.scrolled {
+    background: rgba(6,14,20,0.92);
+    backdrop-filter: blur(12px);
+    border-color: var(--border);
+  }
+  .nav-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.04em;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 32px; }
+  .nav-links a {
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 80px;
+    padding: 120px 80px 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .hero-photo { position: relative; }
+
+  .photo-frame {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .accent-line {
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+
+  .hero-text { display: flex; flex-direction: column; gap: 32px; }
+
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+  .hero-headline {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+  .hero-headline .word { display: inline-block; opacity: 0; transform: translateY(12px); }
+
+  .hero-sub {
+    font-size: 16px;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 440px;
+  }
+
+  .cta-row { display: flex; gap: 16px; align-items: center; margin-top: 8px; }
+  .btn-primary {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 13px 28px;
+    border-radius: 3px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .btn-primary:hover { background: var(--accent-dim); }
+  .cta-note { font-size: 13px; color: var(--muted); }
+
+  /* ── DIVIDER ── */
+  .section-divider {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 80px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ── ASK SECTION ── */
+  .ask-section {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 100px 40px;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(24px, 3vw, 38px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+  .section-body {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.75;
+    margin-bottom: 48px;
+  }
+
+  /* ── FORM ── */
+  .ask-form { display: flex; flex-direction: column; gap: 20px; }
+
+  .field { display: flex; flex-direction: column; gap: 8px; }
+  .field label {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .field input,
+  .field textarea {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 14px 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s;
+    resize: none;
+    width: 100%;
+  }
+  .field input::placeholder,
+  .field textarea::placeholder { color: var(--placeholder); }
+  .field input:focus,
+  .field textarea:focus { border-color: var(--accent); }
+
+  .submit-btn {
+    align-self: flex-start;
+    background: var(--accent);
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 14px 32px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .submit-btn:hover { background: var(--accent-dim); }
+  .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .form-status {
+    font-size: 14px;
+    padding: 14px 18px;
+    border-radius: 3px;
+    display: none;
+  }
+  .form-status.success {
+    display: block;
+    background: rgba(15,143,240,0.08);
+    border: 1px solid rgba(15,143,240,0.25);
+    color: var(--accent);
+  }
+  .form-status.error {
+    display: block;
+    background: rgba(220,60,60,0.08);
+    border: 1px solid rgba(220,60,60,0.25);
+    color: #E05252;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 48px 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+  .socials { display: flex; gap: 24px; }
+  .socials a {
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .socials a:hover { color: var(--accent); }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    nav { padding: 18px 24px; }
+    .nav-links { gap: 20px; }
+    .hero {
+      grid-template-columns: 1fr;
+      gap: 48px;
+      padding: 100px 24px 60px;
+    }
+    .photo-frame { aspect-ratio: 1/1; }
+    .section-divider { padding: 0 24px; }
+    .ask-section { padding: 72px 24px; }
+    footer { padding: 40px 24px; flex-direction: column; gap: 24px; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-name">Amir Abulhassan</a>
+  <div class="nav-links">
+    <a href="#ask">Ask a question</a>
+    <a href="https://instagram.com/amirabulhassan" target="_blank">Instagram</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-photo">
+    <div class="photo-frame">
+      <img src="assets/images/me.jpg" alt="Amir Abulhassan">
+    </div>
+    <div class="accent-line"></div>
+  </div>
+
+  <div class="hero-text">
+    <span class="eyebrow">CS Student · Corporate Intern · Fitness</span>
+    <h1 class="hero-headline" id="headline">
+      <span class="word">I'm a </span><span class="word">21-year-old </span><span class="word">CS </span><span class="word">student </span><span class="word">managing </span><span class="word">a </span><span class="word">corporate </span><span class="word">internship, </span><span class="word">business </span><span class="word">marketing, </span><span class="word">and </span><span class="word">fitness.</span>
+    </h1>
+    <p class="hero-sub">
+      I co-ran a family Lebanese bakery, I'm interning at a tech company, and I'm still showing up to the gym. I'm still figuring it all out — but if anything I'm doing interests you, ask me.
+    </p>
+    <div class="cta-row">
+      <a href="#ask" class="btn-primary">Ask me anything →</a>
+      <span class="cta-note">Replies will be posted on my socials</span>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="section-divider"></div>
+
+<!-- ASK SECTION -->
+<section class="ask-section" id="ask">
+  <h2 class="section-title">What do you actually want to know?</h2>
+  <p class="section-body">
+    I'll try my best to respond to all questions on my page. I'll post it — no names unless you want credit. There are no bad questions.
+  </p>
+
+  <form class="ask-form" id="askForm">
+    <div class="field">
+      <label for="name">Your name <span style="color:var(--placeholder); text-transform:none; letter-spacing:0;">(optional)</span></label>
+      <input type="text" id="name" name="name" placeholder="What should I call you?">
+    </div>
+    <div class="field">
+      <label for="question">Your question *</label>
+      <textarea id="question" name="question" rows="5" placeholder="Ask me anything about balancing school, work, fitness, mindset — or whatever's on your mind." required></textarea>
+    </div>
+    <div class="form-status" id="formStatus"></div>
+    <button type="submit" class="submit-btn" id="submitBtn">
+      <span id="btnText">Send your question</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    </button>
+  </form>
+</section>
+
+<!-- DIVIDER -->
+<div class="section-divider"></div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-name">Amir Abulhassan</span>
+  <div class="socials">
+    <a href="https://instagram.com/amirabulhassan" target="_blank">Instagram</a>
+    <a href="https://tiktok.com/@amirabulhassan" target="_blank">TikTok</a>
+    <a href="https://youtube.com/@amirabulhassan" target="_blank">YouTube</a>
+  </div>
+</footer>
+
+<script>
+  /* ── NAV scroll ── */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  /* ── Headline animation ── */
+  const words = document.querySelectorAll('.word');
+  words.forEach((w, i) => {
+    setTimeout(() => {
+      w.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+      w.style.opacity = '1';
+      w.style.transform = 'translateY(0)';
+    }, 120 + i * 55);
+  });
+
+  /* ── Form submission ── */
+  const form = document.getElementById('askForm');
+  const statusEl = document.getElementById('formStatus');
+  const submitBtn = document.getElementById('submitBtn');
+  const btnText = document.getElementById('btnText');
+
+  const ENDPOINT = 'https://script.google.com/macros/s/AKfycbw6EB4AwtgriHkos35Z-5qBnxNXgWAfa-XOJ7Cgaj85M-rL-UdeyWIA1yCqPP_bsUDS/exec';
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    statusEl.className = 'form-status';
+    statusEl.style.display = 'none';
+
+    const question = document.getElementById('question').value.trim();
+    if (!question) {
+      statusEl.className = 'form-status error';
+      statusEl.textContent = 'Write your question before sending.';
+      return;
+    }
+
+    submitBtn.disabled = true;
+    btnText.textContent = 'Sending…';
+
+    const payload = {
+      name: document.getElementById('name').value.trim() || 'Anonymous',
+      question: question,
+    };
+
+    try {
+      await fetch(ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      statusEl.className = 'form-status success';
+      statusEl.textContent = 'Question received. I read every one.';
+      form.reset();
+    } catch {
+      statusEl.className = 'form-status error';
+      statusEl.textContent = 'Something went wrong. Try again or DM me directly.';
+    } finally {
+      submitBtn.disabled = false;
+      btnText.textContent = 'Send your question';
+    }
+  });
+</script>
+</body>
+</html>
