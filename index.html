@@ -6,8 +6,7 @@
 <title>Amir Abulhassan</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-<style>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,700;0,9..40,800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
@@ -37,7 +36,7 @@
     position: fixed;
     top: 0; left: 0; right: 0;
     z-index: 100;
-    padding: 20px 40px;
+    padding: 22px 48px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -45,19 +44,20 @@
     transition: border-color 0.3s, background 0.3s;
   }
   nav.scrolled {
-    background: rgba(6,14,20,0.92);
-    backdrop-filter: blur(12px);
+    background: rgba(6,14,20,0.95);
+    backdrop-filter: blur(16px);
     border-color: var(--border);
   }
   .nav-name {
-    font-family: 'Syne', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     font-weight: 700;
-    font-size: 15px;
-    letter-spacing: 0.04em;
+    font-size: 14px;
+    letter-spacing: 0.06em;
     color: var(--text);
     text-decoration: none;
+    text-transform: uppercase;
   }
-  .nav-links { display: flex; gap: 32px; }
+  .nav-links { display: flex; gap: 36px; align-items: center; }
   .nav-links a {
     font-size: 13px;
     color: var(--muted);
@@ -66,16 +66,28 @@
     transition: color 0.2s;
   }
   .nav-links a:hover { color: var(--text); }
+  .nav-cta {
+    font-size: 13px;
+    color: var(--accent) !important;
+    border: 1px solid rgba(15,143,240,0.3);
+    padding: 7px 16px;
+    border-radius: 3px;
+    transition: border-color 0.2s, background 0.2s !important;
+  }
+  .nav-cta:hover {
+    border-color: var(--accent) !important;
+    background: rgba(15,143,240,0.06);
+  }
 
   /* ── HERO ── */
   .hero {
     min-height: 100vh;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 5fr 6fr;
     align-items: center;
-    gap: 80px;
-    padding: 120px 80px 80px;
-    max-width: 1100px;
+    gap: 64px;
+    padding: 100px 80px 80px;
+    max-width: 1200px;
     margin: 0 auto;
   }
 
@@ -86,71 +98,141 @@
     aspect-ratio: 3/4;
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 4px;
+    border-radius: 2px;
     overflow: hidden;
+    position: relative;
   }
   .photo-frame img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center top;
     display: block;
   }
-
-  .accent-line {
+  .photo-frame::after {
+    content: '';
     position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 60px;
-    height: 3px;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 55%,
+      rgba(6,14,20,0.5) 100%
+    );
+    pointer-events: none;
+  }
+  .accent-bar {
+    position: absolute;
+    top: 0;
+    left: -3px;
+    width: 3px;
+    height: 72px;
     background: var(--accent);
-    border-radius: 2px;
+    border-radius: 0 2px 2px 0;
   }
 
-  .hero-text { display: flex; flex-direction: column; gap: 32px; }
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
 
   .eyebrow {
-    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
     font-weight: 500;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.16em;
     color: var(--accent);
     text-transform: uppercase;
   }
+  .eyebrow::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
 
   .hero-headline {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(32px, 4vw, 52px);
+    font-family: 'DM Sans', sans-serif;
+    font-size: clamp(28px, 2.6vw, 40px);
     font-weight: 800;
-    line-height: 1.1;
+    line-height: 1.15;
     letter-spacing: -0.02em;
     color: var(--text);
   }
-  .hero-headline .word { display: inline; opacity: 0; transform: translateY(12px); white-space: pre-wrap; }
-  .hero-sub {
-    font-size: 16px;
-    color: var(--muted);
-    line-height: 1.7;
-    max-width: 440px;
+  .hero-headline .word {
+    display: inline;
+    opacity: 0;
+    position: relative;
   }
 
-  .cta-row { display: flex; gap: 16px; align-items: center; margin-top: 8px; }
+  .hero-sub {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 420px;
+    border-left: 2px solid var(--border);
+    padding-left: 16px;
+  }
+
+  .cta-row {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    padding-top: 4px;
+  }
   .btn-primary {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     background: var(--accent);
     color: #fff;
     font-family: 'Inter', sans-serif;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
-    padding: 13px 28px;
+    padding: 12px 24px;
     border-radius: 3px;
     text-decoration: none;
-    transition: background 0.2s;
+    letter-spacing: 0.02em;
+    transition: background 0.2s, transform 0.15s;
   }
-  .btn-primary:hover { background: var(--accent-dim); }
-  .cta-note { font-size: 13px; color: var(--muted); }
+  .btn-primary:hover {
+    background: var(--accent-dim);
+    transform: translateY(-1px);
+  }
+  .cta-note {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+  }
+
+  /* ── STATS ROW ── */
+  .stats-row {
+    display: flex;
+    gap: 32px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+  }
+  .stat { display: flex; flex-direction: column; gap: 2px; }
+  .stat-num {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
 
   /* ── DIVIDER ── */
   .section-divider {
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 80px;
     border-top: 1px solid var(--border);
@@ -158,34 +240,54 @@
 
   /* ── ASK SECTION ── */
   .ask-section {
-    max-width: 700px;
+    max-width: 680px;
     margin: 0 auto;
-    padding: 100px 40px;
+    padding: 96px 40px;
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+    flex-shrink: 0;
   }
 
   .section-title {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(24px, 3vw, 38px);
+    font-family: 'DM Sans', sans-serif;
+    font-size: clamp(24px, 3vw, 36px);
     font-weight: 700;
     line-height: 1.15;
     letter-spacing: -0.02em;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
   }
   .section-body {
     font-size: 15px;
     color: var(--muted);
-    line-height: 1.75;
-    margin-bottom: 48px;
+    line-height: 1.8;
+    margin-bottom: 44px;
   }
 
   /* ── FORM ── */
   .ask-form { display: flex; flex-direction: column; gap: 20px; }
 
-  .field { display: flex; flex-direction: column; gap: 8px; }
+  .field { display: flex; flex-direction: column; gap: 7px; }
   .field label {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 500;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     color: var(--muted);
     text-transform: uppercase;
   }
@@ -195,76 +297,84 @@
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 3px;
-    padding: 14px 16px;
+    padding: 13px 16px;
     font-family: 'Inter', sans-serif;
     font-size: 15px;
     color: var(--text);
     outline: none;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, background 0.2s;
     resize: none;
     width: 100%;
   }
   .field input::placeholder,
   .field textarea::placeholder { color: var(--placeholder); }
   .field input:focus,
-  .field textarea:focus { border-color: var(--accent); }
+  .field textarea:focus {
+    border-color: var(--accent);
+    background: rgba(13,26,36,0.8);
+  }
 
   .submit-btn {
     align-self: flex-start;
     background: var(--accent);
     color: #fff;
     font-family: 'Inter', sans-serif;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
-    padding: 14px 32px;
+    padding: 13px 28px;
     border: none;
     border-radius: 3px;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background 0.2s, transform 0.15s;
     display: flex;
     align-items: center;
     gap: 8px;
+    letter-spacing: 0.02em;
   }
-  .submit-btn:hover { background: var(--accent-dim); }
-  .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .submit-btn:hover {
+    background: var(--accent-dim);
+    transform: translateY(-1px);
+  }
+  .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
   .form-status {
     font-size: 14px;
-    padding: 14px 18px;
+    padding: 13px 16px;
     border-radius: 3px;
     display: none;
   }
   .form-status.success {
     display: block;
-    background: rgba(15,143,240,0.08);
-    border: 1px solid rgba(15,143,240,0.25);
+    background: rgba(15,143,240,0.07);
+    border: 1px solid rgba(15,143,240,0.2);
     color: var(--accent);
   }
   .form-status.error {
     display: block;
-    background: rgba(220,60,60,0.08);
-    border: 1px solid rgba(220,60,60,0.25);
+    background: rgba(220,60,60,0.07);
+    border: 1px solid rgba(220,60,60,0.2);
     color: #E05252;
   }
 
   /* ── FOOTER ── */
   footer {
     border-top: 1px solid var(--border);
-    padding: 48px 80px;
-    max-width: 1100px;
+    padding: 40px 80px;
+    max-width: 1200px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
   .footer-name {
-    font-family: 'Syne', sans-serif;
-    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
     font-weight: 700;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
     color: var(--muted);
   }
-  .socials { display: flex; gap: 24px; }
+  .socials { display: flex; gap: 28px; }
   .socials a {
     font-size: 13px;
     color: var(--muted);
@@ -277,16 +387,25 @@
   /* ── MOBILE ── */
   @media (max-width: 768px) {
     nav { padding: 18px 24px; }
-    .nav-links { gap: 20px; }
+    .nav-links { gap: 16px; }
+    .nav-cta { display: none; }
+
     .hero {
       grid-template-columns: 1fr;
-      gap: 48px;
-      padding: 100px 24px 60px;
+      gap: 40px;
+      padding: 90px 24px 60px;
     }
-    .photo-frame { aspect-ratio: 1/1; }
+    .photo-frame { aspect-ratio: 4/5; }
+    .accent-bar { display: none; }
+    .stats-row { gap: 24px; }
     .section-divider { padding: 0 24px; }
-    .ask-section { padding: 72px 24px; }
-    footer { padding: 40px 24px; flex-direction: column; gap: 24px; align-items: flex-start; }
+    .ask-section { padding: 64px 24px; }
+    footer {
+      padding: 36px 24px;
+      flex-direction: column;
+      gap: 20px;
+      align-items: flex-start;
+    }
   }
 </style>
 </head>
@@ -296,8 +415,8 @@
 <nav id="nav">
   <a href="#" class="nav-name">Amir Abulhassan</a>
   <div class="nav-links">
-    <a href="#ask">Ask a question</a>
     <a href="https://instagram.com/amirabulhassan" target="_blank">Instagram</a>
+    <a href="#ask" class="nav-cta">Ask a question</a>
   </div>
 </nav>
 
@@ -307,20 +426,41 @@
     <div class="photo-frame">
       <img src="assets/images/me.JPG" alt="Amir Abulhassan">
     </div>
-    <div class="accent-line"></div>
+    <div class="accent-bar"></div>
   </div>
 
   <div class="hero-text">
     <span class="eyebrow">CS Student · Corporate Intern · Fitness</span>
+
     <h1 class="hero-headline" id="headline">
       <span class="word">I'm a </span><span class="word">21-year-old </span><span class="word">CS </span><span class="word">student </span><span class="word">managing </span><span class="word">a </span><span class="word">corporate </span><span class="word">internship, </span><span class="word">social media </span><span class="word">marketing, </span><span class="word">and </span><span class="word">fitness.</span>
     </h1>
+
     <p class="hero-sub">
       I co-ran a family Lebanese bakery, I'm interning at a tech company, and I'm still showing up to the gym. I'm still figuring it all out, but if anything I'm doing interests you, ask me.
     </p>
+
     <div class="cta-row">
-      <a href="#ask" class="btn-primary">Ask me anything →</a>
-      <span class="cta-note">Replies will be posted on my socials</span>
+      <a href="#ask" class="btn-primary">
+        Ask me anything
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <span class="cta-note">Replies posted on my socials</span>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat">
+        <span class="stat-num">21</span>
+        <span class="stat-label">Years old</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">3+</span>
+        <span class="stat-label">Years training</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">CS</span>
+        <span class="stat-label">Student</span>
+      </div>
     </div>
   </div>
 </section>
@@ -330,6 +470,7 @@
 
 <!-- ASK SECTION -->
 <section class="ask-section" id="ask">
+  <p class="section-label">The question box</p>
   <h2 class="section-title">What do you actually want to know?</h2>
   <p class="section-body">
     I'll try my best to respond to all questions on my page. I'll post it on my page. No names unless you want credit. There are no bad questions.
@@ -337,7 +478,7 @@
 
   <form class="ask-form" id="askForm">
     <div class="field">
-      <label for="name">Your name <span style="color:var(--placeholder); text-transform:none; letter-spacing:0;">(optional)</span></label>
+      <label for="name">Your name <span style="color:var(--placeholder); text-transform:none; letter-spacing:0; font-size:11px;">(optional)</span></label>
       <input type="text" id="name" name="name" placeholder="What should I call you?">
     </div>
     <div class="field">
@@ -347,7 +488,7 @@
     <div class="form-status" id="formStatus"></div>
     <button type="submit" class="submit-btn" id="submitBtn">
       <span id="btnText">Send your question</span>
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
     </button>
   </form>
 </section>
@@ -366,23 +507,19 @@
 </footer>
 
 <script>
-  /* ── NAV scroll ── */
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 40);
   });
 
-  /* ── Headline animation ── */
   const words = document.querySelectorAll('.word');
   words.forEach((w, i) => {
     setTimeout(() => {
-      w.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+      w.style.transition = 'opacity 0.4s ease';
       w.style.opacity = '1';
-      w.style.transform = 'translateY(0)';
-    }, 120 + i * 55);
+    }, 100 + i * 60);
   });
 
-  /* ── Form submission ── */
   const form = document.getElementById('askForm');
   const statusEl = document.getElementById('formStatus');
   const submitBtn = document.getElementById('submitBtn');
